@@ -1,7 +1,8 @@
+from flask import Flask, render_template as rnd
 import requests, json
 
-from flask import Flask, render_template as rnd
 app = Flask(__name__)
+
 
 def getTotal(headers):
     r = requests.get("https://www.vinbudin.is/addons/origo/module/ajaxwebservices/search.asmx/DoSearch?category=strong&skip=0&count=1&orderBy=random", headers=headers)
