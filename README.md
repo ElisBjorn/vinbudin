@@ -1,2 +1,1 @@
-# vinbudin
-Ódýrt áfengi.
+# Ódýrt áfengi.

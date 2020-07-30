@@ -1,0 +1,17 @@
+body {
+    font-family: "Trebuchet MS","Arial","sans-serif";
+    background-color: Gainsboro;
+    text-align: center;
+}
+h1{
+    color: firebrick;
+    font-size: 200%;
+}
+.b{
+    border: 4px darkred;
+    border-style: dashed;
+}
+.i{
+    width: 20%;
+    padding-bottom: 1%;
+}
