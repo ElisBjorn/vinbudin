@@ -1,8 +1,7 @@
-from flask import Flask, render_template as rnd
 import requests, json
 
+from flask import Flask, render_template as rnd
 app = Flask(__name__)
-
 
 def getTotal(headers):
     r = requests.get("https://www.vinbudin.is/addons/origo/module/ajaxwebservices/search.asmx/DoSearch?category=strong&skip=0&count=1&orderBy=random", headers=headers)
@@ -30,13 +29,14 @@ for i in range(len(api["data"])):
     alc = x[i]['ProductAlchoholVolume']
 
     alcPrice.append(price/(vol*0.01*alc))
-    info.append([x[i]['ProductID'],x[i]['ProductName'],x[i]['ProductBottledVolume'],x[i]['ProductAlchoholVolume'],x[i]["ProductSubCategory"]["name"]])
+    info.append([x[i]['ProductID'],x[i]['ProductName'],x[i]['ProductBottledVolume'],x[i]['ProductAlchoholVolume'],x[i]["ProductSubCategory"]["name"],x[i]['ProductPrice']])
 
 id = info[alcPrice.index(min(alcPrice))][0]
 name = info[alcPrice.index(min(alcPrice))][1]
 ml = int(info[alcPrice.index(min(alcPrice))][2])
 alc = info[alcPrice.index(min(alcPrice))][3]
 cat = info[alcPrice.index(min(alcPrice))][4]
+pri = str(info[alcPrice.index(min(alcPrice))][5])[:-2]
 
 """
 print(f"Name:\t{name}")
@@ -48,9 +48,9 @@ print(f"ID:\t{id}")
 
 @app.route("/")
 def index():
-    return rnd("index.html", id=id, name=name, ml=ml, alc=alc, cat=cat)
+    return rnd("index.html", id=id, name=name, ml=ml, alc=alc, cat=cat, pri=pri)
 
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
